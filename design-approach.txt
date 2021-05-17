@@ -1,0 +1,11 @@
+####### Soltion of creating image with Unique colors #######
+
+1. As our image dimension is of 256 x 128, so total colours reqired are 32768
+2. and we have to create colors in multiple of 8 in order to get 32 unique numbers (256 / 8 = 32)
+3. so, generated 32 unique numbers using a while loop
+4. once I have 32 unique numbers, I generated uniquew numbers in a set of 3, 
+   as I need colors in RGB mode (as 32x32x32 = 32768)
+5. Once I have colors I set them in Canavas
+6. Colors generation happening on first time page load and on clicking of button too
+   each time button is clicked, new set of unique numbers get generated and based on that we generate new colors
+

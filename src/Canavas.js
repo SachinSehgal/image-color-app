@@ -56,7 +56,11 @@ const Canavas = ({ uniqueNumbers }) => {
     generateColor(uniqueNumbers);
   }, [uniqueNumbers]);
 
-  return <canvas ref={canvas}></canvas>;
+  return (
+    <div>
+      <canvas ref={canvas}></canvas>
+    </div>
+  );
 };
 
 export default Canavas;
