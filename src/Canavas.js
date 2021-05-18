@@ -1,13 +1,13 @@
 import React, { useRef, useEffect } from "react";
+import { generateColor } from "./Common";
 
 const Canavas = ({ uniqueNumbers }) => {
   const canvas = useRef(null);
   const ctx = useRef(null);
 
   // draw pixel with background
-  const drawFillRect = (info, style) => {
-    const { x, y, w, h } = info;
-    const { backgroundColor } = style;
+  const drawFillRect = (info) => {
+    const { x, y, w, h, backgroundColor } = info;
 
     ctx.current.beginPath();
     ctx.current.fillStyle = backgroundColor;
@@ -25,35 +25,17 @@ const Canavas = ({ uniqueNumbers }) => {
     ctx.current = context;
   }, []);
 
-  // generate colors
-  const generateColor = (data) => {
-    let count = 0;
-    let xAxis = 0;
-    let yAxis = 0;
-    for (let i = 0; i < data.length; i++) {
-      for (let j = 0; j < data.length; j++) {
-        for (let k = 0; k < data.length; k++) {
-          count++;
-          drawFillRect(
-            { x: xAxis * 1, y: yAxis, w: 1, h: 1 },
-            {
-              backgroundColor: `rgb(${data[k]},${data[j]},${data[i]})`,
-            }
-          );
-          xAxis++;
-
-          // logic to wrap the pixels to next line
-          if (count % 256 === 0) {
-            yAxis = yAxis + 1;
-            xAxis = 0;
-          }
-        }
-      }
-    }
-  };
-
   useEffect(() => {
-    generateColor(uniqueNumbers);
+    (async function () {
+      try {
+        const colors = await generateColor(uniqueNumbers);
+        colors.forEach((color) => {
+          drawFillRect(color);
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    })();
   }, [uniqueNumbers]);
 
   return (
