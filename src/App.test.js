@@ -14,7 +14,7 @@ it("should render Button and Canavas", () => {
 
 // test 2 - generate unique numbers
 it("should generate unique numbers", () => {
-  const resultSet = generateUniqueNumbers(5);
+  const resultSet = generateUniqueNumbers(31);
   const resultArray = [...Array.from(resultSet)];
   const isArrayUnique = resultSet.size === resultArray.length;
 
